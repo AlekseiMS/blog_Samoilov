@@ -15,12 +15,18 @@
 
     <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/">Главная</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/about">Про нас</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/about">Обо мне</a>
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/reviews">Отзывы</a>
     </nav>
 </div>
 <div class="container mt-5">
     <h1>{{title}}</h1>
+    <form action="reviews-add" method="post">
+        <input type="text" name="title" placeholder="Введите название" class="form-control"><br>
+        <textarea name="text" placeholder="Введите текст" class="form-control"></textarea><br>
+        <button type="submit" class="btn btn-success">Добавить</button>
+    </form>
+    <h3 class="mt-2">Все отзывы</h3>
     {{#reviews}}
         <h3>{{title}}</h3>
         <p>{{text}}</p>

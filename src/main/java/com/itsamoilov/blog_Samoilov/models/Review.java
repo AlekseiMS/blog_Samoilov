@@ -1,15 +1,13 @@
 package com.itsamoilov.blog_Samoilov.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "review_id")
     private Long review_id;
     private String title, text;
 
@@ -34,6 +32,15 @@ public class Review {
     }
 
     public void setText(String text) {
+        this.text = text;
+    }
+
+    public Review() {
+        this.review_id = review_id;
+    }
+
+    public Review(String title, String text) {
+        this.title = title;
         this.text = text;
     }
 }
