@@ -27,9 +27,11 @@
         <button type="submit" class="btn btn-success">Добавить</button>
     </form>
     <h3 class="mt-2">Все отзывы</h3>
+    
     {{#reviews}}
-        <h3>{{title}}</h3>
+        <h3 class="mt-2">{{title}}</h3>
         <p>{{text}}</p>
+        <a class="btn btn-warning" href="/reviews/{{review_id}}">Детальнее</a>
     {{/reviews}}
 </div>
 
