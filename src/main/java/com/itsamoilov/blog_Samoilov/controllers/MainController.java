@@ -1,7 +1,10 @@
 package com.itsamoilov.blog_Samoilov.controllers;
 
 import com.itsamoilov.blog_Samoilov.models.Review;
+import com.itsamoilov.blog_Samoilov.models.Role;
+import com.itsamoilov.blog_Samoilov.models.User;
 import com.itsamoilov.blog_Samoilov.repo.ReviewRepository;
+import com.itsamoilov.blog_Samoilov.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,15 +12,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class MainController {
 
     @Autowired
     private ReviewRepository reviewRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/")
     public String home(Map<String, Object> model) {
@@ -90,5 +94,19 @@ public class MainController {
         reviewRepository.delete(review);
 
         return "redirect:/reviews";
+    }
+
+    @GetMapping("/reg")
+    public String reg() {
+        return "reg";
+    }
+
+    @PostMapping("/reg")
+    public String addUser(User user, Map<String, Object> model) {
+        user.setEnabled(true);
+        user.setRoles(Collections.singleton(Role.USER));
+        userRepository.save(user);
+
+        return "redirect:/login";
     }
 }
