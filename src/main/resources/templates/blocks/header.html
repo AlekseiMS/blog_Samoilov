@@ -1,0 +1,21 @@
+<div xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" th:fragment="header">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none">
+            <span class="fs-4">itSamoilov</span>
+        </a>
+        <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+            <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/">Главная</a>
+            <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/about">Обо мне</a>
+            <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/reviews">Отзывы</a>
+        </nav>
+        <div sec:authorize="!isFullyAuthenticated()">
+            <a href="/reg" class="btn btn-success mr-2">Регистрация</a>
+            <a href="/login" class="btn btn-warning m-2">Войти</a>
+        </div>
+        <div sec:authorize="isFullyAuthenticated()">
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" class="btn btn-danger" value="Выйти"/>
+            </form>
+        </div>
+    </div>
+</div>
