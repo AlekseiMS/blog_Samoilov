@@ -6,6 +6,7 @@ import com.itsamoilov.blog_Samoilov.models.User;
 import com.itsamoilov.blog_Samoilov.repo.ReviewRepository;
 import com.itsamoilov.blog_Samoilov.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,13 +41,14 @@ public class MainController {
     public String reviews(Model model) {
         Iterable<Review> reviews = reviewRepository.findAll();
         model.addAttribute("title", "Страница с отзывами");
+        model.addAttribute("text", "Создание нового отзыва");
         model.addAttribute("reviews", reviews);
         return "reviews";
     }
     @PostMapping("/reviews-add")
-    public String reviewsAdd(@RequestParam String title,
+    public String reviewsAdd(@AuthenticationPrincipal User user, @RequestParam String title,
                              @RequestParam String text,Model model) {
-        Review review = new Review(title, text);
+        Review review = new Review(title, text, user);
         reviewRepository.save(review);
 
         return "redirect:/reviews";
